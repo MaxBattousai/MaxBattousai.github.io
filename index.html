@@ -4,33 +4,86 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
+
+    <Style>
+        body{
+            font-family: Arial, Helvetica, sans-serif;
+            background-color: rgb(167, 178, 182);
+        }
+
+        .galeria{
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .fila{
+            display: flex;
+        }
+
+        button{
+            margin: 5px;
+            font-size: 16px;
+            width: 80px;
+            border-radius: 50px;
+            font-weight: bold;
+        }
+
+        img{
+            width: 400px;
+            height: 300px;
+            border-radius: 50px;
+        }
+
+        #contador{
+            margin-top: 20px;
+            font-size: 50px;
+            font-weight: bold;
+        }
+    </Style>
+
 </head>
 <body>
-    <div>
-        <img id="imagen" src="1.jpg" alt="" width="300" height="200"><br>
-        <button id="anterior" onclick="botonPrev()">Preview</button>
-        <button id="siguiente" onclick="botonNext()">Next</button>
-        <p>1-10</p>
-
-        <script>
-            let imagenes = [
-                "1.jpg",
-                "2.jpg",
-                "3.jpg",
-                "4.jpg",
-            ]
-
-            let indice = 1;
-
-            function botonPrev(){
-                document.getElementById("imagen").src = imagenes[indice-- % imagenes.length]
-                document.getElementsByTagName("p").innerText = indice--
-            }
-
-            function botonNext(){
-                document.getElementById("imagen").src = imagenes[indice++ % imagenes.length]
-            }
-        </script>
+    <div class="galeria">
+        <div class="fila">
+            <button id="anterior" onclick="botonPrev()">Preview</button>
+            <img id="imagen" src="1.jpg" alt="">
+            <button id="siguiente" onclick="botonNext()">Next</button>
+        </div>
+        <p id="contador">1 / 4</p>
     </div>
+    <script>
+
+        let imagenes = [
+            "1.jpg",
+            "2.jpg",
+            "3.jpg",
+            "4.jpg",
+        ]
+
+        let indice = 0;
+        let imgActual = document.getElementById("imagen");
+        let contador = document.getElementById("contador");
+
+        //CALCULO Y MUESTRO EL INDICE
+        function mostrarIndice(){
+            let i =((indice % imagenes.length) + imagenes.length) % imagenes.length;
+            imgActual.src = imagenes[i];
+            contador.innerText = (i + 1) + " / " + imagenes.length;
+        }
+
+        //FUNCIONES PARA LOS BOTONES
+        function botonPrev(){
+            indice--
+            mostrarIndice();
+        }
+
+        function botonNext(){
+            indice++
+            mostrarIndice();
+        }
+        mostrarIndice()
+    </script>
 </body>
 </html>
