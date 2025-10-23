@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <div>
+        <img id="imagen" src="1.jpg" alt="" width="300" height="200"><br>
+        <button id="anterior" onclick="botonPrev()">Preview</button>
+        <button id="siguiente" onclick="botonNext()">Next</button>
+        <p>1-10</p>
+
+        <script>
+            let imagenes = [
+                "1.jpg",
+                "2.jpg",
+                "3.jpg",
+                "4.jpg",
+            ]
+
+            let indice = 1;
+
+            function botonPrev(){
+                document.getElementById("imagen").src = imagenes[indice-- % imagenes.length]
+                document.getElementsByTagName("p").innerText = indice--
+            }
+
+            function botonNext(){
+                document.getElementById("imagen").src = imagenes[indice++ % imagenes.length]
+            }
+        </script>
+    </div>
+</body>
+</html>
